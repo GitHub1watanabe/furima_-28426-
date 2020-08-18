@@ -2,11 +2,11 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|mail_address|integer|null: false, foreign_key: true|
-|password|integer|null: false, foreign_key: true|
-|birthday|integer|null: false, foreign_key: true|
-|surname_name|integer|null: false, foreign_key: true|
-|furigana|integer|null: false, foreign_key: true|
+|mail_address|integer|null: false|
+|password|string|null: false|
+|birthday|integer|null: false|
+|surname_name|integer|null: false|
+|furigana|integer|null: false|
 
 ### Association
 - has_one :users
@@ -20,12 +20,14 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|price|integer|null: false, foreign_key: true|
-|image|integer|null: false, foreign_key: true|
-|sell|integer|null: false, foreign_key: true|
-|comment|integer|null: false, foreign_key: true|
-|category|integer|null: false, foreign_key: true|
-|status|integer|null: false, foreign_key: true|
+|price|string|null: false|
+|image|string|null: false|
+|sell|integer|null: false|
+|comment|integer|null: false|
+|category|integer|null: false|
+|status|integer|null: false|
+|delivery_date|integer|null: false|
+|delivery_charge|integer|null: false|
 
 ### Association
 - has_one :items
@@ -35,6 +37,8 @@
 - belongs_to :comment
 - belongs_to :category
 - belongs_to :status
+- belongs_to :delivery_date
+- belongs_to :delivery_charge
 
 ## buyテーブル
 |Column|Type|Options|
@@ -43,22 +47,23 @@
 |user_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :item_id
-- belongs_to :user_id
+- belongs_to :item
+- belongs_to :user
 
 ## addressテーブル
 |Column|Type|Options|
 |------|----|-------|
-|buy_id|null: false, foreign_key: true|
-|postal_code|integer|null: false, foreign_key: true|
-|prefectures|integer|null: false, foreign_key: true|
-|delivery_date|integer|null: false, foreign_key: true|
-|delivery_charge|integer|null: false, foreign_key: true|
+|buy_id|null: false|
+|postal_code|string|null: false|
+|prefectures|integer|null: false|
+|phone_number|string|null: false|
+|municipalities|integer|null: false|
+
 
 ### Association
 - has_one :address
 - belongs_to :buy_id
 - belongs_to :postal_code
 - belongs_to :prefectures
-- belongs_to :delivery_date
-- belongs_to :delivery_charge
+- belongs_to :phone_number
+- belongs_to :municipalities
