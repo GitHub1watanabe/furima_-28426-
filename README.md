@@ -5,16 +5,16 @@
 |user_id|integer|null: false, foreign_key: true|
 |mail_address|integer|null: false, foreign_key: true|
 |password|integer|null: false, foreign_key: true|
-|home_address|integer|null: false, foreign_key: true|
 |buy_point|integer|null: false, foreign_key: true|
+|birthday|integer|null: false, foreign_key: true|
 
 ### Association
 - has_one :users
 - belongs_to :user_id
 - belongs_to :mail_address
 - belongs_to :password
-- belongs_to :home_address
 - belongs_to :buy_point
+- belongs_to :birthday
 
 ## itemsテーブル
 
@@ -25,6 +25,8 @@
 |review|integer|null: false, foreign_key: true|
 |sell|integer|null: false, foreign_key: true|
 |comment|integer|null: false, foreign_key: true|
+|category|integer|null: false, foreign_key: true|
+|status|integer|null: false, foreign_key: true|
 
 ### Association
 - has_one :items
@@ -33,6 +35,8 @@
 - belongs_to :review
 - belongs_to :sell
 - belongs_to :comment
+- belongs_to :category
+- belongs_to :status
 
 ## buyテーブル
 |Column|Type|Options|
@@ -41,7 +45,6 @@
 |user_id|integer|null: false, foreign_key: true|
 
 ### Association
-- has_one :buy
 - belongs_to :item_id
 - belongs_to :user_id
 
@@ -51,9 +54,13 @@
 |buy_id|null: false, foreign_key: true|
 |postal_code|integer|null: false, foreign_key: true|
 |prefectures|integer|null: false, foreign_key: true|
+|delivery_date|integer|null: false, foreign_key: true|
+|delivery_charge|integer|null: false, foreign_key: true|
 
 ### Association
 - has_one :address
 - belongs_to :buy_id
 - belongs_to :postal_code
 - belongs_to :prefectures
+- belongs_to :delivery_date
+- belongs_to :delivery_charge
