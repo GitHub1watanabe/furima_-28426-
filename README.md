@@ -35,5 +35,25 @@
 - belongs_to :comment
 
 ## buyテーブル
+|Column|Type|Options|
+|------|----|-------|
+|item_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
+
+### Association
+- has_one :buy
+- belongs_to :item_id
+- belongs_to :user_id
 
 ## addressテーブル
+|Column|Type|Options|
+|------|----|-------|
+|buy_id|null: false, foreign_key: true|
+|postal_code|integer|null: false, foreign_key: true|
+|prefectures|integer|null: false, foreign_key: true|
+
+### Association
+- has_one :address
+- belongs_to :buy_id
+- belongs_to :postal_code
+- belongs_to :prefectures
