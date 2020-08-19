@@ -2,19 +2,23 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|mail_address|integer|null: false|
+|mail_address|string|null: false|
 |password|string|null: false|
-|birthday|integer|null: false|
-|surname_name|integer|null: false|
-|furigana|integer|null: false|
+|birthday|date|null: false|
+|surname|integer|null: false|
+|name|integer|null: false|
+|surname_furigana|integer|null: false|
+|name_furigana|integer|null: false|
 
 ### Association
 - has_one :users
-- belongs_to :mail_address
-- belongs_to :password
-- belongs_to :birthday
-- belongs_to :surname_name
-- belongs_to :furigana
+- has_many :mail_address
+- has_many :password
+- has_many :birthday
+- has_many :surname
+- has_many :name
+- has_many :surname_furigana
+- has_many :name_furigana
 
 ## itemsテーブル
 
@@ -31,20 +35,13 @@
 
 ### Association
 - has_one :items
-- belongs_to :price
-- belongs_to :image
-- belongs_to :sell
-- belongs_to :comment
-- belongs_to :category
-- belongs_to :status
-- belongs_to :delivery_date
-- belongs_to :delivery_charge
+
 
 ## buyテーブル
 |Column|Type|Options|
 |------|----|-------|
-|item_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
+|item|integer|null: false, foreign_key: true|
+|user|integer|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :item
@@ -62,8 +59,5 @@
 
 ### Association
 - has_one :address
-- belongs_to :buy_id
-- belongs_to :postal_code
-- belongs_to :prefectures
-- belongs_to :phone_number
-- belongs_to :municipalities
+- has_many :buy_id
+
