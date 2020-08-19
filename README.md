@@ -11,9 +11,14 @@
 |name_furigana|integer|null: false|
 
 ### Association
-- has_many :items
-- has_many :buy
-
+- has_one :users
+- has_many :mail_address
+- has_many :password
+- has_many :birthday
+- has_many :surname
+- has_many :name
+- has_many :surname_furigana
+- has_many :name_furigana
 
 ## itemsテーブル
 
@@ -29,8 +34,7 @@
 |delivery_charge|integer|null: false|
 
 ### Association
-- belongs_to :user
-- belongs_to :buy
+- has_one :items
 
 
 ## buyテーブル
@@ -54,5 +58,6 @@
 
 
 ### Association
-- belongs_to :user
+- has_one :address
+- has_many :buy_id
 
