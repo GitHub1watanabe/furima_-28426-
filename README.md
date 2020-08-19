@@ -31,7 +31,7 @@
 |delivery_area|integer|null: false|
 
 ### Association
-- belongs_to :buy
+- has_one :buy
 - belongs_to :user
 
 
@@ -44,7 +44,7 @@
 ### Association
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one :address
 
 ## addressテーブル
 |Column|Type|Options|
@@ -54,7 +54,9 @@
 |prefectures|integer|null: false|
 |phone_number|string|null: false|
 |municipalities|string|null: false|
-
+|house_number|string|null: false|
+|building|string|null: false|
 
 ### Association
 - belongs_to :user
+- has_many :buy
