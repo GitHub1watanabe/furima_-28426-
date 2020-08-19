@@ -21,7 +21,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|product_name|string|null: false|
+|name|string|null: false|
 |price|string|null: false|
 |image|string|null: false|
 |comment|integer|null: false|
@@ -44,7 +44,6 @@
 ### Association
 - belongs_to :item
 - belongs_to :user
-- has_one :address
 
 ## addressテーブル
 |Column|Type|Options|
@@ -55,7 +54,7 @@
 |phone_number|string|null: false|
 |municipalities|string|null: false|
 |house_number|string|null: false|
-|building|string|null: false|
+|building|string|
 
 ### Association
 - belongs_to :user
