@@ -12,13 +12,16 @@
 |nickname|string|null: false|
 
 ### Association
-- has_many :users
+- has_many :items
+- has_many :buys
+- has_one :address
 
 
 ## itemsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
+|product_name|string|null: false|
 |price|string|null: false|
 |image|string|null: false|
 |comment|integer|null: false|
@@ -35,17 +38,18 @@
 ## buyテーブル
 |Column|Type|Options|
 |------|----|-------|
-|item|integer|null: false, foreign_key: true|
-|user|integer|null: false, foreign_key: true|
+|item|references|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :item
 - belongs_to :user
+- belongs_to :address
 
 ## addressテーブル
 |Column|Type|Options|
 |------|----|-------|
-|buy_id|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 |postal_code|string|null: false|
 |prefectures|integer|null: false|
 |phone_number|string|null: false|
@@ -53,5 +57,4 @@
 
 
 ### Association
-- belongs_to :buy_id
-
+- belongs_to :user
