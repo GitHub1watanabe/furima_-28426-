@@ -5,10 +5,11 @@
 |mail_address|string|null: false|
 |password|string|null: false|
 |birthday|date|null: false|
-|surname|integer|null: false|
-|name|integer|null: false|
+|surname|string|null: false|
+|name|string|null: false|
 |surname_furigana|string|null: false|
 |name_furigana|string|null: false|
+|nickname|string|null: false|
 
 ### Association
 - has_many :users
@@ -24,7 +25,7 @@
 |category|integer|null: false|
 |status|integer|null: false|
 |delivery_date|integer|null: false|
-|delivery_charge|integer|null: false|
+|delivery_area|integer|null: false|
 
 ### Association
 - belongs_to :buy
@@ -52,6 +53,5 @@
 
 
 ### Association
-- has_one :address
-- has_many :buy_id
+- belongs_to :buy_id
 
