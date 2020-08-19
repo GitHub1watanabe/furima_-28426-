@@ -7,18 +7,12 @@
 |birthday|date|null: false|
 |surname|integer|null: false|
 |name|integer|null: false|
-|surname_furigana|integer|null: false|
-|name_furigana|integer|null: false|
+|surname_furigana|string|null: false|
+|name_furigana|string|null: false|
 
 ### Association
-- has_one :users
-- has_many :mail_address
-- has_many :password
-- has_many :birthday
-- has_many :surname
-- has_many :name
-- has_many :surname_furigana
-- has_many :name_furigana
+- has_many :users
+
 
 ## itemsテーブル
 
@@ -26,7 +20,6 @@
 |------|----|-------|
 |price|string|null: false|
 |image|string|null: false|
-|sell|integer|null: false|
 |comment|integer|null: false|
 |category|integer|null: false|
 |status|integer|null: false|
@@ -34,7 +27,8 @@
 |delivery_charge|integer|null: false|
 
 ### Association
-- has_one :items
+- belongs_to :buy
+- belongs_to :user
 
 
 ## buyテーブル
@@ -50,11 +44,11 @@
 ## addressテーブル
 |Column|Type|Options|
 |------|----|-------|
-|buy_id|null: false|
+|buy_id|null: false, foreign_key: true|
 |postal_code|string|null: false|
 |prefectures|integer|null: false|
 |phone_number|string|null: false|
-|municipalities|integer|null: false|
+|municipalities|string|null: false|
 
 
 ### Association
