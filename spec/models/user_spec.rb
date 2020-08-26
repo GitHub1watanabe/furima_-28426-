@@ -14,8 +14,12 @@ describe User do
         expect(@user).to be_valid
       end
       it "passwordが6文字以上であれば登録できる" do
-        @user.password = "000000"
-        @user.password_confirmation = "000000"
+        @user.password = "000011aabb"
+        @user.password_confirmation = "000011aabb"
+        expect(@user).to be_valid
+      end
+      it "emailに@があれば登録できる" do
+        @user.email = "gatx0142sutoraiku@gmail.com"
         expect(@user).to be_valid
       end
     end
@@ -24,7 +28,7 @@ describe User do
       it "nameが空だと登録できない" do
         @user.name = ''
         @user.valid?
-        expect(@user.errors.full_messages).to include('Name is invalid')
+        expect(@user.errors.full_messages).to include("Name can't be blank")
       end
       it "emailが空では登録できない" do
         @user.email = ""
@@ -33,8 +37,7 @@ describe User do
       end
       it "重複したemailが存在する場合登録できない" do
         @user.save
-        another_user = FactoryBot.build(:user)
-        another_user.email = @user.email
+        another_user = FactoryBot.build(:user,email:@user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
@@ -53,6 +56,56 @@ describe User do
         @user.password_confirmation = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it "passwordが半角英数字以外だと登録できない" do
+        @user.password = "00000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Including half-width alphanumeric characters")
+      end
+      it "ユーザー本名の苗字が必須である" do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
+      it "ユーザー本名の名前が必須である" do
+        @user.last_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
+      it "ユーザー本名の苗字は全角（漢字・ひらがな・カタカナ）で入力させること" do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name please enter in full-width characters")
+      end
+      it "ユーザー本名の名前は全角（漢字・ひらがな・カタカナ）で入力させること" do
+        @user.last_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name please enter in full-width characters")
+      end
+      it "ユーザー本名の苗字のフリガナが、名字と名前でそれぞれ必須であること" do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank")
+      end
+      it "ユーザー本名の名前のフリガナが、名字と名前でそれぞれ必須であること" do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank")
+      end
+      it "ユーザー本名の苗字はフリガナは全角（カタカナ）で入力させること" do
+        @user.first_name_kana = 'first'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana Please enter in the full-width katakana")
+      end
+      it "ユーザー本名の名前はフリガナは全角（カタカナ）で入力させること" do
+        @user.last_name_kana = 'last'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana Please enter in the full-width katakana")
+      end
+      it "生年月日が必須であること" do
+        @user.birth_date = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
     end
   end
