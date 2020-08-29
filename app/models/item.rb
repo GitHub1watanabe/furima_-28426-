@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :genre
   belongs_to_active_hash :status
   belongs_to_active_hash :fee
+  belongs_to_active_hash :delivery_area
   has_one_attached :image
   belongs_to :user
 end
