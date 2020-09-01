@@ -10,7 +10,7 @@ class Item < ApplicationRecord
     validates :delivery_area_id,  presence:{ message:'Please select a delivery area'}
     validates :delivery_date_id,  presence:{ message:'Please select a delivery date'}
     validates :price, presence: { message:'Enter price'}
-  
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
     belongs_to_active_hash :genre
     belongs_to_active_hash :status
