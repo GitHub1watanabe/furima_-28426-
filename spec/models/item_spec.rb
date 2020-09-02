@@ -1,7 +1,6 @@
 require 'rails_helper'
 describe Item do
   before do
-    # user = FactoryBot.create(:item_user)
     @item = FactoryBot.build(:item)
     @item.image = fixture_file_upload('public/images/test_image.jpg')
   end
