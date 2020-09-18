@@ -1,4 +1,9 @@
 class BuysController < ApplicationController
+
+  def index
+    @items = Item.all.order("created_at ASC")
+end
+
   def create
     @buy = Buy.new(price: order_params[:price])
     if @buy.valid?

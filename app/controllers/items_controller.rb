@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(price: item_params[:price])
+    @item = Item.new(item_params)
     if @item.valid?
        @item.save
       redirect_to root_path
