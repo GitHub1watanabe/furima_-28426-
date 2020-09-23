@@ -5,7 +5,7 @@ class BuysController < ApplicationController
 end
 
   def create
-    @buy = BuyAddress.new(price: order_params[:price])
+    @buy = BuyAddress.new(order_params)
     if @buy.valid?
       pay_item
       @buy.save
@@ -18,7 +18,7 @@ end
   private
 
   def order_params
-    params.permit(:price, :token)
+    params.permit(:postal_code, :prefecture, :phone_number, :municipalities, :house_number, :building, :token).merge(user_id: current_user.id)
   end
   
   def pay_item
