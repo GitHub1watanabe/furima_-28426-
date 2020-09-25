@@ -1,10 +1,12 @@
 class BuysController < ApplicationController
 
   def index
-    @items = Item.all.order("created_at ASC")
-end
+    @item = Item.find(params[:item_id])
+    @buy = BuyAddress.new
+  end
 
   def create
+    @item = Item.find(params[:item_id])
     @buy = BuyAddress.new(order_params)
     if @buy.valid?
       pay_item
@@ -18,13 +20,14 @@ end
   private
 
   def order_params
-    params.permit(:postal_code, :prefecture, :phone_number, :municipalities, :house_number, :building, :token).merge(user_id: current_user.id)
+    params.require(:item).permit(:postal_code, :prefectures, :phone_number, :municipalities, :house_number, :building,).merge(user_id: current_user.id, item_id: @item.id ,token: params[:token])
   end
   
   def pay_item
-    Payjp.api_key = "sk_test_b596f59eb6ce6f59df2b377f"  # PAY.JPテスト秘密鍵
+    @item = Item.find(params[:item_id])
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
+      amount: @item.price,  # 商品の値段
       card: order_params[:token],    # カードトークン
       currency:'jpy'                 # 通貨の種類(日本円)
     )
