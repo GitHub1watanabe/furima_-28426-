@@ -1,5 +1,6 @@
 class BuysController < ApplicationController
   before_action :item_buy
+  before_action :item_redirect 
 
   def index
     @buy = BuyAddress.new
@@ -17,6 +18,12 @@ class BuysController < ApplicationController
   end
 
   private
+
+  def item_redirect
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
 
   def item_buy
     @item = Item.find(params[:item_id])
