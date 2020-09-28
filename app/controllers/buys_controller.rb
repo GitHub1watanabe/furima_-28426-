@@ -1,6 +1,6 @@
 class BuysController < ApplicationController
-  before_action :item_buy,
-  
+  before_action :item_buy
+
   def index
     @buy = BuyAddress.new
   end
