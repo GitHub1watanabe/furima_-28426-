@@ -51,5 +51,10 @@ RSpec.describe BuyAddress, type: :model do
       @buy.valid?
       expect(@buy.errors.full_messages).to include("Phone number Numbers longer than 11 digits cannot be saved")
     end
+    it 'tokenが空では保存できない' do
+      @buy.token = nil
+      @buy.valid?
+      expect(@buy.errors.full_messages).to include("Token can't be blank")
+    end
   end
 end

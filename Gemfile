@@ -62,10 +62,7 @@ gem 'pry-rails'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'active_hash'
- 商品購入機能
 gem 'payjp'
-=======
 group :production do
   gem 'rails_12factor'
 end
- master
